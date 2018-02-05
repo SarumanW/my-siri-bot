@@ -1,7 +1,8 @@
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.*;
-
+import java.util.Map;
 
 
 public class WikiGetter {
@@ -13,7 +14,9 @@ public class WikiGetter {
 
         try {
             JSONObject jsonObject = urlReader.readJsonFromUrl(jsonPage);
-            System.out.println(jsonObject.get("batchcomplete"));
+            Map<String, Object> map = Mapper.convertJSONtoMap(jsonObject);
+            map.forEach((k,v) ->
+                    System.out.println(k + " = " + v));
         } catch (IOException ex){
             ex.printStackTrace();
         }
