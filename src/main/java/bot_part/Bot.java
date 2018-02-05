@@ -6,6 +6,7 @@ import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
+import wiki_work.SearchWiki;
 
 public class Bot extends TelegramLongPollingBot{
 
@@ -14,7 +15,9 @@ public class Bot extends TelegramLongPollingBot{
 
         if (update.hasMessage() && update.getMessage().hasText()) {
 
-            String messageText = update.getMessage().getText();
+            String query = update.getMessage().getText();
+            SearchWiki searchWiki = new SearchWiki();
+            String messageText = searchWiki.run(query);
             long chatId = update.getMessage().getChatId();
 
             SendMessage message = new SendMessage()
