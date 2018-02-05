@@ -1,4 +1,7 @@
+package wiki_work;
+
 import org.json.JSONObject;
+import wiki_work.Mapper;
 
 import java.io.IOException;
 import java.util.Map;
@@ -29,18 +32,15 @@ public class SearchWiki {
             String result = (String) map.get("extract");
             if(result==null) {
                 System.out.println("Your query is not correct. Try one more time");
-                return;
             }
             else if(result.contains("refer to") || result.contains("may mean")){
                 findRefers(result);
-                return;
             }
             else {
                 System.out.println("The meaning of your word in wiki:");
                 System.out.println(map.get("extract"));
-//                map.forEach((k, v) ->
-//                        System.out.println(k + " = " + v));
             }
+
         } catch (IOException ex){
             ex.printStackTrace();
         }
@@ -48,7 +48,7 @@ public class SearchWiki {
 
     private void findRefers(String result) throws IOException{
         String[] array = result.split("\n");
-        for(int i = 1; i<array.length; i++){
+        for(int i = 1; i<array.length - 1; i++){
             System.out.println(array[i]);
         }
     }

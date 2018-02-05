@@ -1,3 +1,5 @@
+package wiki_work;
+
 import org.json.JSONObject;
 
 import java.io.IOException;
