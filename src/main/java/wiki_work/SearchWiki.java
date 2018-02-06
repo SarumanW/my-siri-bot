@@ -4,17 +4,17 @@ import org.json.JSONObject;
 import wiki_work.Mapper;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class SearchWiki {
     private String queryJSON = "https://en.wikipedia.org/w/api.php?format=json" +
             "&action=query&prop=extracts&exintro=&explaintext=&titles=";
-    private Scanner sc;
     private URLReader urlReader;
+    private Map<String, Object> JSONMap;
 
     public SearchWiki(){
-        sc = new Scanner(System.in);
         urlReader = new URLReader();
     }
 
@@ -22,27 +22,29 @@ public class SearchWiki {
         word = word.replaceAll("\\s", "%20");
         queryJSON = new StringBuilder().append(queryJSON).append(word).toString();
         String output = "";
+        String result = "";
 
         try {
             JSONObject jsonObject = urlReader.readJsonFromUrl(queryJSON);
-            Map<String, Object> map = Mapper.convertJSONtoMap(jsonObject);
+            JSONMap = Mapper.convertJSONtoMap(jsonObject);
 
-            String result = (String) map.get("extract");
+            if (JSONMap.containsKey("extract")) {
+                result = (String) JSONMap.get("extract");
+            }
 
-            if(result == null) {
+            if(result.isEmpty()) {
                 output = "Your query is not correct. Try one more time";
-            }
-            else if(result.contains("refer to") || result.contains("may mean")){
+            } else if(result.contains("refer to") || result.contains("may mean")){
                 output = findRefers(result);
-            }
-            else {
-                output = (String) map.get("extract");
+            } else {
+                output = result;
             }
 
         } catch (IOException ex){
             ex.printStackTrace();
         }
 
+        JSONMap.clear();
         return output;
     }
 

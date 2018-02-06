@@ -19,6 +19,8 @@ public class Bot extends TelegramLongPollingBot{
             SearchWiki searchWiki = new SearchWiki();
             String messageText = searchWiki.run(query);
             long chatId = update.getMessage().getChatId();
+            System.out.println(query);
+            System.out.println(messageText);
 
             SendMessage message = new SendMessage()
                     .setChatId(chatId)
