@@ -1,18 +1,18 @@
 package wiki_work;
 
+import bot_part.Redactor;
+
 import java.util.Scanner;
 
 public class WikiGetter {
 
 //    public static void main(String[] args) {
 //        SearchWiki searchWiki = new SearchWiki();
-//        Scanner sc = new Scanner(System.in);
-//        String str = "";
-//        //System.out.println(searchWiki.run(str));
-//        while(!str.equals("exit")) {
-//            System.out.print("Input - ");
-//            str = sc.nextLine();
-//            System.out.println(searchWiki.run(str));
-//        }
+//        String str = "whale";
+//        String output = searchWiki.run(str);
+//        if(output.length() > 4000)
+//            output = Redactor.cut(output);
+//        System.out.println(output);
+//        System.out.println(output.length());
 //    }
 }

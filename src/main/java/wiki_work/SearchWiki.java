@@ -1,12 +1,9 @@
 package wiki_work;
 
 import org.json.JSONObject;
-import wiki_work.Mapper;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class SearchWiki {
     private String queryJSON = "https://en.wikipedia.org/w/api.php?format=json" +

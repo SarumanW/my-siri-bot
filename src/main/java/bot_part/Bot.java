@@ -9,6 +9,7 @@ import org.telegram.telegrambots.exceptions.TelegramApiException;
 import wiki_work.SearchWiki;
 
 public class Bot extends TelegramLongPollingBot{
+    private final static int SIZE = 2000;
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -19,8 +20,9 @@ public class Bot extends TelegramLongPollingBot{
             SearchWiki searchWiki = new SearchWiki();
             String messageText = searchWiki.run(query);
             long chatId = update.getMessage().getChatId();
-            System.out.println(query);
-            System.out.println(messageText);
+
+            if(messageText.length() > SIZE)
+                messageText = Redactor.cut(messageText, SIZE);
 
             SendMessage message = new SendMessage()
                     .setChatId(chatId)
